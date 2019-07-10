@@ -48,7 +48,6 @@ namespace SVMPredict
                 }
                 
             }
-            Console.WriteLine("math {0}", 15d / 40d);
             double result = ((double) total /(double) i);
             Console.WriteLine("total samples {0}, Crossvalidation Accuracy {1}%",total, Math.Round(cva*100,2));
             Console.WriteLine("Prediction accuracy = {0}%", Math.Round(result*100,2) );
