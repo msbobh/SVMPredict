@@ -1,0 +1,88 @@
+[1mdiff --git a/.vs/SVMPredict/v16/.suo b/.vs/SVMPredict/v16/.suo[m
+[1mindex a31109c..5388258 100644[m
+Binary files a/.vs/SVMPredict/v16/.suo and b/.vs/SVMPredict/v16/.suo differ
+[1mdiff --git a/.vs/SVMPredict/v16/Server/sqlite3/storage.ide b/.vs/SVMPredict/v16/Server/sqlite3/storage.ide[m
+[1mindex fc29266..324b804 100644[m
+Binary files a/.vs/SVMPredict/v16/Server/sqlite3/storage.ide and b/.vs/SVMPredict/v16/Server/sqlite3/storage.ide differ
+[1mdiff --git a/Program.cs b/Program.cs[m
+[1mindex a4462e1..1ea0a87 100644[m
+[1m--- a/Program.cs[m
+[1m+++ b/Program.cs[m
+[36m@@ -5,6 +5,7 @@[m [musing System.Text;[m
+ using System.Threading.Tasks;[m
+ using System.IO;[m
+ using libsvm;[m
+[32m+[m[32musing PredictionRoutines;[m
+ [m
+ namespace SVMPredict[m
+ {[m
+[36m@@ -34,22 +35,10 @@[m [mnamespace SVMPredict[m
+             var predfile = ProblemHelper.ReadProblem(testfile);[m
+             var svm = new C_SVC(trainfile, KernelHelper.RadialBasisFunctionKernel(gamma), C);[m
+             var cva = svm.GetCrossValidationAccuracy(5);[m
+[31m-            int i = 0;[m
+[31m-            int total = 1;[m
+[32m+[m
+[32m+[m[32m            double result = Predict.Predict_y(testfile,svm);[m
+                         [m
+[31m-            for ( i = 0; i < predfile.l; i++)[m
+[31m-            {[m
+[31m-                var x = predfile.x[i]; // x is the ith vector sample[m
+[31m-                var expectedValue = predfile.y[i];[m
+[31m-                var predictedValue = svm.Predict(x); // Make label prediciton [m
+[31m-                if (predictedValue == expectedValue)[m
+[31m-                {[m
+[31m-                    total++;[m
+[31m-                }[m
+[31m-                [m
+[31m-            }[m
+[31m-            double result = ((double) total /(double) i);[m
+[31m-            Console.WriteLine("total samples {0}, Crossvalidation Accuracy {1}%",total, Math.Round(cva*100,2));[m
+[32m+[m[32m            Console.WriteLine("total samples {0}, Crossvalidation Accuracy {1}%",predfile.l, Math.Round(cva*100,2));[m
+             Console.WriteLine("Prediction accuracy = {0}%", Math.Round(result*100,2) );[m
+             [m
+         }[m
+[1mdiff --git a/SVMPrediction.cs b/SVMPrediction.cs[m
+[1mindex ed00538..a76344e 100644[m
+[1m--- a/SVMPrediction.cs[m
+[1m+++ b/SVMPrediction.cs[m
+[36m@@ -7,8 +7,8 @@[m [mnamespace PredictionRoutines[m
+ {[m
+     class Predict [m
+     {[m
+[31m-        [m
+[31m-         static public double Predict_y(string inputfile,C_SVC svm)[m
+[32m+[m
+[32m+[m[32m        static public double Predict_y(string inputfile, C_SVC svm)[m
+         {[m
+             int i;[m
+             double total = 1;[m
+[36m@@ -24,10 +24,10 @@[m [mnamespace PredictionRoutines[m
+                 {[m
+                     total++;[m
+                 }[m
+[31m-                               [m
+[31m-            }[m
+[31m-            return total;[m
+ [m
+[32m+[m[32m            }[m
+[32m+[m[32m            double result = ((double)total / (double)i);[m
+[32m+[m[32m            return result;[m
+         }[m
+         [m
+     }[m
+[1mdiff --git a/bin/Debug/SVMPredict.exe b/bin/Debug/SVMPredict.exe[m
+[1mindex a2b1c8d..e753280 100644[m
+Binary files a/bin/Debug/SVMPredict.exe and b/bin/Debug/SVMPredict.exe differ
+[1mdiff --git a/bin/Debug/SVMPredict.pdb b/bin/Debug/SVMPredict.pdb[m
+[1mindex 96b1366..6b7b9c4 100644[m
+Binary files a/bin/Debug/SVMPredict.pdb and b/bin/Debug/SVMPredict.pdb differ
+[1mdiff --git a/obj/Debug/SVMPredict.csprojAssemblyReference.cache b/obj/Debug/SVMPredict.csprojAssemblyReference.cache[m
+[1mindex 0cd958f..55ce8bb 100644[m
+Binary files a/obj/Debug/SVMPredict.csprojAssemblyReference.cache and b/obj/Debug/SVMPredict.csprojAssemblyReference.cache differ
+[1mdiff --git a/obj/Debug/SVMPredict.exe b/obj/Debug/SVMPredict.exe[m
+[1mindex a2b1c8d..e753280 100644[m
+Binary files a/obj/Debug/SVMPredict.exe and b/obj/Debug/SVMPredict.exe differ
+[1mdiff --git a/obj/Debug/SVMPredict.pdb b/obj/Debug/SVMPredict.pdb[m
+[1mindex 96b1366..6b7b9c4 100644[m
+Binary files a/obj/Debug/SVMPredict.pdb and b/obj/Debug/SVMPredict.pdb differ

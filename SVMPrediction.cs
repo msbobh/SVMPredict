@@ -7,8 +7,8 @@ namespace PredictionRoutines
 {
     class Predict 
     {
-        
-         static public double Predict_y(string inputfile,C_SVC svm)
+
+        static public double Predict_y(string inputfile, C_SVC svm)
         {
             int i;
             double total = 1;
@@ -24,10 +24,10 @@ namespace PredictionRoutines
                 {
                     total++;
                 }
-                               
-            }
-            return total;
 
+            }
+            double result = ((double)total / (double)i);
+            return result;
         }
         
     }
