@@ -3,13 +3,17 @@ using libsvm;
 
 
 
-namespace PredictionRoutines
+namespace SVMSupport
 {
-    class Predict 
+    class Predictions 
     {
 
-        static public double Predict_y(string inputfile, C_SVC svm)
+        static public double PredictTestSet (string inputfile, C_SVC svm)
         {
+            /* Given a test set "Inputfile" and previoulsy trained SVM calculates the accuracty of the
+             * the trained SVM. Fucntion returns the percent correct.
+             */
+
             int i;
             double total = 1;
             var predfile = ProblemHelper.ReadProblem(inputfile);
@@ -17,18 +21,16 @@ namespace PredictionRoutines
 
             for (i = 0; i < predfile.l; i++)
             {
-                var x = predfile.x[i]; // x is the ith vector sample
+                var x = predfile.x[i];                  // x is the ith vector sample
                 expectedValue = predfile.y[i];
-                var predictedValue = svm.Predict(x); // Make label prediciton 
-                if (predictedValue == expectedValue) // Compare the predicited with the known value and calculate accruacty
+                var predictedValue = svm.Predict(x);    // Make label prediciton 
+                if (predictedValue == expectedValue)    // Compare the prediction with actual 
                 {
                     total++;
                 }
-
             }
-            double result = ((double)total / (double)i);
+            double result = ((double)total / (double)i);    // Calculate the accuracy and return
             return result;
-        }
-        
+        }        
     }
 }

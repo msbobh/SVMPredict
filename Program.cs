@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using libsvm;
-using PredictionRoutines;
+using SVMSupport;
 
 namespace SVMPredict
 {
@@ -34,12 +34,13 @@ namespace SVMPredict
                         
             var predfile = ProblemHelper.ReadProblem(testfile);
             var svm = new C_SVC(trainfile, KernelHelper.RadialBasisFunctionKernel(gamma), C);
+            
             var cva = svm.GetCrossValidationAccuracy(5);
-
-            double result = Predict.Predict_y(testfile,svm);
+            double result = Predictions.PredictTestSet(testfile,svm);
                         
             Console.WriteLine("total samples {0}, Crossvalidation Accuracy {1}%",predfile.l, Math.Round(cva*100,2));
             Console.WriteLine("Prediction accuracy = {0}%", Math.Round(result*100,2) );
+            //svm.Export(string model_file_name);
             
         }
     }
