@@ -1,1 +1,10 @@
 bin/
+.vs/SVMPredict/v16/.suo
+bin/Debug/SVMPredict.exe
+bin/Debug/SVMPredict.pdb
+obj/Debug/SVMPredict.csproj.FileListAbsolute.txt
+obj/Debug/SVMPredict.csprojAssemblyReference.cache
+obj/Debug/SVMPredict.exe
+obj/Debug/SVMPredict.pdb
+.vs/SVMPredict/v16/Server/sqlite3/storage.ide-shm
+.vs/SVMPredict/v16/Server/sqlite3/storage.ide-wal

@@ -22,18 +22,18 @@ namespace SVMPredict
         {
             if (args.Length <= 1)
             {
-                Console.WriteLine("Usage: PredictSVM <trainfile> <test file> ");
+                Console.WriteLine("Usage: PredictSVM <trained model> <test file> ");
                 System.Environment.Exit(0);
             }
 
-            string trainfile = args[0];
+            string modelfile = args[0];
             string testfile = args[1];
-            Console.WriteLine("Trainfile = {0}", trainfile);
+            Console.WriteLine("Model File = {0}", modelfile);
             Console.WriteLine("testfile = {0}", testfile);
             
                         
             var predfile = ProblemHelper.ReadProblem(testfile);
-            var svm = new C_SVC(trainfile, KernelHelper.RadialBasisFunctionKernel(gamma), C);
+            var svm = new C_SVC(modelfile, KernelHelper.RadialBasisFunctionKernel(gamma), C);
             
             var cva = svm.GetCrossValidationAccuracy(5);
             double result = Predictions.PredictTestSet(testfile,svm);

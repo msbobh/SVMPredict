@@ -10,7 +10,7 @@ namespace SVMSupport
 
         static public double PredictTestSet (string inputfile, C_SVC svm)
         {
-            /* Given a test set "Inputfile" and previoulsy trained SVM calculates the accuracty of the
+            /* Given a test set "Inputfile" and previoulsy trained SVM calculates the accuracy of the
              * the trained SVM. Fucntion returns the percent correct.
              */
 
