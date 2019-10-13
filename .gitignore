@@ -8,3 +8,5 @@ obj/Debug/SVMPredict.exe
 obj/Debug/SVMPredict.pdb
 .vs/SVMPredict/v16/Server/sqlite3/storage.ide-shm
 .vs/SVMPredict/v16/Server/sqlite3/storage.ide-wal
+.vs/SVMPredict/v16/.suo
+.vs/SVMPredict/v16/Server/sqlite3/storage.ide
